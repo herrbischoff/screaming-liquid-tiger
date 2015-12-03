@@ -4,9 +4,21 @@ Simple script to automatically generate valid RSS and Atom feeds from a list of 
 
 I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/) to listen to my Audiobooks. Podcast players are ideal applications for this, contrary to generic media players. It is also trivial to be adapted to other uses and file types.
 
-## Installation
+* Automatically gets media files from same folder, no fiddling with a GUI
+* Automatically sets file modification date
+* Automatically sets per-file MIME type
+* Automatically sets file size
+* Generates valid RSS and Atom feeds for maximum compatibility
 
-Just upload the index.php file in a folder on a web server running PHP 5.4 or higher. Edit the configuration variables if needed and upload media files of any kind. For personal podcasting use, these should obviously be audio files but you can use it with any kind of files.
+## Installation and Usage
+
+Just upload the `index.php` file to a folder on a web server running PHP 5.4 or higher. Edit the configuration variables if needed and upload media files of any kind. For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
+
+## Changelog
+
+### 0.1.0
+
+Inital release.
 
 ## License
 
