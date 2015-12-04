@@ -2,7 +2,7 @@
 
 Simple script to automatically generate valid RSS and Atom feeds from a list of media files in the same folder.
 
-I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/) to listen to my Audiobooks. Podcast players are ideal applications for this, contrary to generic media players. It is also trivial to be adapted to other uses and file types.
+I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/) to listen to my audiobooks. Podcast players are ideal applications for this, contrary to generic media players. It is also trivial to be adapted to other uses and file types.
 
 * Automatically gets media files from same folder, no fiddling with a GUI
 * Automatically sets file modification date
@@ -16,11 +16,18 @@ Just upload the `index.php` file to a folder on a web server running PHP 5.4 or 
 
 ## Changelog
 
+### 0.1.1
+
+* Some restructuring and clean up.
+* More code comments.
+
 ### 0.1.0
 
-Inital release.
+* Inital release.
 
 ## License
+
+The MIT Licence
 
 Copyright © 2015 Marcel Bischoff
 
