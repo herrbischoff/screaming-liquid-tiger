@@ -16,6 +16,15 @@ Just upload the `index.php` file to a folder on a web server running PHP 5.4 or 
 
 ## Changelog
 
+### 0.1.2
+
+* Added .gitignore
+* Proper array alignment
+* Added FLAC extension and MIME type
+* Exchanged fileinfo for manual array of MIME values
+* Normalized PHP echo tags
+* Implemented XML header fix for PHP 7
+
 ### 0.1.1
 
 * Some restructuring and clean up.
