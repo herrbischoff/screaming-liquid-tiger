@@ -86,7 +86,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         <description><?= $conf['description'] ?></description>
         <pubDate><?= date($date_fmt) ?></pubDate>
         <lastBuildDate><?= date($date_fmt) ?></lastBuildDate>
-        <atom:link href="<?= $base_url ?>" rel="self" type="application/rss+xml" />
+        <atom:link href="<?= $base_url ?>" rel="self" type="application/rss+xml"/>
 <?php
 /**
  * Open file handler for current directory
