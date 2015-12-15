@@ -19,6 +19,22 @@ I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/
 
 For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
 
+## How to Create Your Own Audiobooks
+
+There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted but its extension `.m4b`.Here's a quick list of software your can use.
+
+For Mac OS X, take a look at [Audiobook Builder](http://www.splasm.com/audiobookbuilder/). It's a fantastic and inexpensive piece of software. It's what I use.
+
+For Windows, I hear good things about  [Chapter and Verse](http://lodensoftware.com/chapter-and-verse/). You'll need both the application and iTunes for it to work.
+
+For Linux, there are two older projects worth mentioning: [m4baker](https://github.com/crabmanX/m4baker) and [zak](https://code.google.com/p/zak/). If those won't do, you could always script the hell out of `ffmpeg`, `mp4v2` and `MP4tools`.
+
+## Screenshot
+
+Here's what an audiobook may look like while playing in Overcast. Nice, isn't it?
+
+![Screenshot](https://cdn.rawgit.com/herrbischoff/screaming-liquid-tiger/master/assets/screenshot.jpg)
+
 ## Changelog
 
 ### 0.2.0
