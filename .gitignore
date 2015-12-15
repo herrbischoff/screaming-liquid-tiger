@@ -11,3 +11,4 @@
 *.png
 ffmpeg
 tmp
+!/assets/*
