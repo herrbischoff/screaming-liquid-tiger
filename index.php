@@ -77,17 +77,16 @@ $prot = ($_SERVER['HTTPS'] != "on") ? 'http://' : 'https://';
  */
 $base_url = str_replace("index.php", "", $prot . $_SERVER["HTTP_HOST"] . $_SERVER["PHP_SELF"]);
 
-echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title><?= $conf['title'] ?></title>
-        <link><?= $conf['link'] ?></link>
-        <description><?= $conf['description'] ?></description>
-        <pubDate><?= date($date_fmt) ?></pubDate>
-        <lastBuildDate><?= date($date_fmt) ?></lastBuildDate>
-        <atom:link href="<?= $base_url ?>" rel="self" type="application/rss+xml"/>
-<?php
+printf("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+printf("<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n");
+printf("\t<channel>\n");
+printf("\t\t<title>%s</title>\n", $conf['title']);
+printf("\t\t<link>%s</link>\n", $conf['link']);
+printf("\t\t<description>%s</description>\n", $conf['description']);
+printf("\t\t<pubDate>%s</pubDate>\n", date($date_fmt));
+printf("\t\t<lastBuildDate>%s</lastBuildDate>\n", date($date_fmt));
+printf("\t\t<atom:link href=\"%s\" rel=\"self\" type=\"application/rss+xml\"/>\n", $base_url);
+
 /**
  * Open file handler for current directory
  */
@@ -102,14 +101,17 @@ if ($handle = opendir('.')) :
          * Make sure file matches extensions from array
          */
         if (array_key_exists(pathinfo($entry, PATHINFO_EXTENSION), $exts)) :
-?>
-        <item>
-            <title><?php $p = pathinfo($entry); echo $p['filename'] ?></title>
-            <guid><?= $base_url . rawurlencode($entry) ?></guid>
-            <enclosure url="<?= $base_url . rawurlencode($entry) ?>" length="<?= filesize($entry) ?>" type="<?= $exts[$p['extension']] ?>"/>
-            <pubDate><?= date($date_fmt, filemtime($entry)) ?></pubDate>
-        </item>
-<?php
+            printf("\t\t<item>\n");
+            $p = pathinfo($entry);
+            printf("\t\t\t<title>%s</title>\n", $p['filename']);
+            printf("\t\t\t<guid>%s</guid>\n", $base_url . rawurlencode($entry));
+            printf("\t\t\t<enclosure url=\"%s\" length=\"%s\" type=\"%s\"/>\n",
+                $base_url . rawurlencode($entry),
+                filesize($entry),
+                $exts[$p['extension']]
+            );
+            printf("\t\t\t<pubDate>%s</pubDate>\n", date($date_fmt, filemtime($entry)));
+            printf("\t\t</item>\n");
         endif;
 
     /**
@@ -123,6 +125,6 @@ endif;
  * Close file handler
  */
 closedir($handle);
-?>
-    </channel>
-</rss>
+
+printf("\t</channel>\n");
+printf("</rss>");
