@@ -33,7 +33,7 @@ For Linux, there are two older projects worth mentioning: [m4baker](https://gith
 
 Here's what an audiobook may look like while playing in Overcast. Nice, isn't it?
 
-![Screenshot](https://cdn.rawgit.com/herrbischoff/screaming-liquid-tiger/master/assets/screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/herrbischoff/screaming-liquid-tiger/master/assets/screenshot.jpg)
 
 ## Changelog
 
