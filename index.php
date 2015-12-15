@@ -7,7 +7,7 @@
  * @author     Marcel Bischoff
  * @copyright  2015 Marcel Bischoff
  * @license    http://opensource.org/licenses/MIT The MIT Licence
- * @version    0.1.2
+ * @version    0.2.0
  * @link       https://github.com/herrbischoff/screaming-liquid-tiger
  * @since      File available since Release 0.1.0
  *****************************************************************************/

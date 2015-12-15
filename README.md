@@ -9,12 +9,23 @@ I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/
 * Automatically sets per-file MIME type
 * Automatically sets file size
 * Generates valid RSS and Atom feeds for maximum compatibility
+* Automatically extracts tag information and artwork when `ffmpeg` is installed
 
 ## Installation and Usage
 
-Just upload the `index.php` file to a folder on a web server running PHP 5.4 or higher. Edit the configuration variables if needed and upload media files of any kind. For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
+* Upload `index.php` file to a folder on a web server running PHP 5.4 or higher.
+* Edit the configuration variables if needed and upload media files of any kind.
+* Optionally make sure `ffmpeg` is installed. Follow the instructions displayed or simply set the `$ffmpeg_check` variable to `false`.
+
+For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
 
 ## Changelog
+
+### 0.2.0
+
+* Added optional tag and artwork reading capability through `ffmpeg`
+* Added optional feed image output
+* Added optional duration tag
 
 ### 0.1.2
 
