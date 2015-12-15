@@ -21,7 +21,7 @@ For personal podcasting use, those should obviously be audio files but you can u
 
 ## How to Create Your Own Audiobooks
 
-There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted but its extension `.m4b`.Here's a quick list of software your can use.
+There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted but its extension `.m4b`. Here's a quick list of software you can use.
 
 For Mac OS X, take a look at [Audiobook Builder](http://www.splasm.com/audiobookbuilder/). It's a fantastic and inexpensive piece of software. It's what I use.
 
@@ -59,7 +59,7 @@ Here's what an audiobook may look like while playing in Overcast. Nice, isn't it
 
 ### 0.1.0
 
-* Inital release.
+* Initial release.
 
 ## License
 
