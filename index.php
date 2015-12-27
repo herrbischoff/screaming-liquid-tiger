@@ -119,6 +119,9 @@ if ($conf['image'] && file_exists($conf['image'])) :
     $castimg_url = $base_url . rawurlencode($conf['image']);
 endif;
 
+/**
+ * Output feed header
+ */
 printf("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 printf("<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">\n");
 printf("\t<channel>\n");
@@ -151,12 +154,18 @@ if ($handle = opendir('.')) :
             $fileimg_path = escapeshellarg('./tmp/' . $filename . '.jpg');
             $fileimg_url = $base_url . 'tmp/' . rawurlencode($filename . '.jpg');
 
+            /**
+             * Get mediainfo output for current file
+             */
             ob_start();
             $cmd = $mediainfo . ' --Inform=\'General;%Duration/String3%#####%Performer% — %Album%\' ' . escapeshellarg($entry) . ' 2>&1';
             passthru($cmd);
             $mediainfo_out = ob_get_contents();
             ob_end_clean();
 
+            /**
+             * Parse mediainfo output
+             */
             if ($mediainfo) :
                 preg_match('/(\d{2}:\d{2}:\d{2}.\d+)#####(.+)/', $mediainfo_out, $matches);
                 $duration = $matches[1];
@@ -164,6 +173,10 @@ if ($handle = opendir('.')) :
             else :
                 $title = $p['filename'];
             endif;
+
+            /**
+             * Output feed item
+             */
             printf("\t\t<item>\n");
             printf("\t\t\t<title>%s</title>\n", $title);
             printf("\t\t\t<guid isPermalink=\"false\">%s</guid>\n", $base_url . rawurlencode($entry));
@@ -177,6 +190,7 @@ if ($handle = opendir('.')) :
                 printf("\t\t\t<itunes:duration>%s</itunes:duration>\n", $duration);
             endif;
             printf("\t\t</item>\n");
+
         endif;
 
     /**
