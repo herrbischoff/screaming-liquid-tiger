@@ -21,43 +21,51 @@ setlocale(LC_CTYPE, "C.UTF-8");
  * Configuration Start
  *****************************************************************************/
 
-/**
- * Whether to check for mediainfo
- */
-$mediainfo_check = false;
+if (!file_exists('./config.php')) :
 
-/**
- * Feed info
- *
- * Basic feed information.
- *
- * description: basically anything you want, may appear in feed reader
- * link: dummy or real URL
- * title: your feed title as it appears in the feed reader
- * image: main image for feed (optional)
- */
-$conf = array(
-    'description' => 'Personal Audiobook Feed',
-    'link'        => 'http://www.example.com',
-    'title'       => 'Audiobook Podcast',
-    'image'       => 'cast.jpg'
-);
+    /**
+     * Whether to check for mediainfo
+     */
+    $mediainfo_check = false;
 
-/**
- * File extensions
- *
- * Extensions to use for feed item creation. Add your own extensions to be
- * included, the corresponding MIME types are generated automatically.
- */
-$exts = array(
-    'flac' => 'audio/flac',
-    'm4a'  => 'audio/mp4',
-    'm4b'  => 'audio/mp4',
-    'mp3'  => 'audio/mp3',
-    'mp4'  => 'audio/mp4',
-    'oga'  => 'audio/ogg',
-    'ogg'  => 'audio/ogg'
-);
+    /**
+     * Feed info
+     *
+     * Basic feed information.
+     *
+     * description: basically anything you want, may appear in feed reader
+     * link: dummy or real URL
+     * title: your feed title as it appears in the feed reader
+     * image: main image for feed (optional)
+     */
+    $conf = array(
+        'description' => 'Personal Audiobook Feed',
+        'link'        => 'http://www.example.com',
+        'title'       => 'Audiobook Podcast',
+        'image'       => 'cast.jpg'
+    );
+
+    /**
+     * File extensions
+     *
+     * Extensions to use for feed item creation. Add your own extensions to be
+     * included, the corresponding MIME types are generated automatically.
+     */
+    $exts = array(
+        'flac' => 'audio/flac',
+        'm4a'  => 'audio/mp4',
+        'm4b'  => 'audio/mp4',
+        'mp3'  => 'audio/mp3',
+        'mp4'  => 'audio/mp4',
+        'oga'  => 'audio/ogg',
+        'ogg'  => 'audio/ogg'
+    );
+
+else :
+
+    require_once('./config.php');
+
+endif;
 
 /******************************************************************************
  * Configuration End
