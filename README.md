@@ -19,6 +19,8 @@ I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/
 
 For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
 
+For easier upgrades, you can now use a `config.php` file (included) to set your options. The script will autodetect if it is present. If not, it will fall back to its included defaults.
+
 ## How to Create Your Own Audiobooks
 
 There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted but its extension `.m4b`. Here's a quick list of software you can use.
@@ -36,6 +38,10 @@ Here's what an audiobook may look like while playing in Overcast. Nice, isn't it
 ![Screenshot](https://raw.githubusercontent.com/herrbischoff/screaming-liquid-tiger/master/assets/screenshot.jpg)
 
 ## Changelog
+
+### 0.2.2
+
+* Enabled external config file `config.php`.
 
 ### 0.2.1
 
