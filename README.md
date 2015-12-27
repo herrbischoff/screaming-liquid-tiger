@@ -23,7 +23,7 @@ For easier upgrades, you can now use a `config.php` file (included) to set your 
 
 ## How to Create Your Own Audiobooks
 
-There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted but its extension `.m4b`. Here's a quick list of software you can use.
+There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted by its extension `.m4b`. Here's a quick list of software you can use.
 
 For Mac OS X, take a look at [Audiobook Builder](http://www.splasm.com/audiobookbuilder/). It's a fantastic and inexpensive piece of software. It's what I use.
 
