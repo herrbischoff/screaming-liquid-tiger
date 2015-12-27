@@ -158,7 +158,8 @@ if ($handle = opendir('.')) :
              * Get mediainfo output for current file
              */
             ob_start();
-            $cmd = $mediainfo . ' --Inform=\'General;%Duration/String3%#####%Performer% — %Album%\' ' . escapeshellarg($entry) . ' 2>&1';
+            $opt = ' --Inform=\'General;%Duration/String3%#####%Performer% — %Album%\' ';
+            $cmd = $mediainfo . $opt  . escapeshellarg($entry) . ' 2>&1';
             passthru($cmd);
             $mediainfo_out = ob_get_contents();
             ob_end_clean();
@@ -179,7 +180,8 @@ if ($handle = opendir('.')) :
              */
             printf("\t\t<item>\n");
             printf("\t\t\t<title>%s</title>\n", $title);
-            printf("\t\t\t<guid isPermalink=\"false\">%s</guid>\n", $base_url . rawurlencode($entry));
+            printf("\t\t\t<guid isPermalink=\"false\">%s</guid>\n",
+                $base_url . rawurlencode($entry));
             printf("\t\t\t<enclosure url=\"%s\" length=\"%s\" type=\"%s\"/>\n",
                 $base_url . rawurlencode($entry),
                 filesize($entry),
