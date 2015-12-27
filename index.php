@@ -24,7 +24,7 @@ setlocale(LC_CTYPE, "C.UTF-8");
 /**
  * Whether to check for mediainfo
  */
-$mediainfo_check = true;
+$mediainfo_check = false;
 
 /**
  * Feed info
