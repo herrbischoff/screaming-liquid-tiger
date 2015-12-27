@@ -15,7 +15,7 @@ I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/
 
 * Upload `index.php` file to a folder on a web server running PHP 5.4 or higher.
 * Edit the configuration variables if needed and upload media files of any kind.
-* Optionally make sure `ffmpeg` is installed. Follow the instructions displayed or simply set the `$ffmpeg_check` variable to `false`.
+* Optionally make sure `mediainfo` is installed. Set the `$mediainfo_check` variable to `true` and follow the instructions displayed. If no instructions show but your feed appears, it already works.
 
 For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
 
@@ -36,6 +36,11 @@ Here's what an audiobook may look like while playing in Overcast. Nice, isn't it
 ![Screenshot](https://raw.githubusercontent.com/herrbischoff/screaming-liquid-tiger/master/assets/screenshot.jpg)
 
 ## Changelog
+
+### 0.2.1
+
+* Exchanged `ffmpeg` for `mediainfo`, as image support in podcasting clients is generally limited and `mediainfo` generates faster and more reliable output.
+* Set `$mediainfo_check` variable to `false` as default
 
 ### 0.2.0
 
