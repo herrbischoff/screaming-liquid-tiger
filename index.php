@@ -13,6 +13,13 @@
  *****************************************************************************/
 
 /**
+ * Check PHP version
+ */
+if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400) :
+    die('You need PHP 5.4+. You have ' . PHP_VERSION . '.');
+endif;
+
+/**
  * Make sure that unicode characters in file names are not dropped.
  */
 setlocale(LC_CTYPE, "C.UTF-8");
@@ -75,13 +82,6 @@ endif;
  * Output correct content type
  */
 header('Content-type: application/rss+xml; charset=utf-8');
-
-/**
- * Check PHP version
- */
-if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400) :
-    die('You need PHP 5.4+. You have ' . PHP_VERSION . '.');
-endif;
 
 /**
  * Get mediainfo path
