@@ -22,9 +22,9 @@ setlocale(LC_CTYPE, "C.UTF-8");
  *****************************************************************************/
 
 /**
- * Whether to check for ffmpeg
+ * Whether to check for mediainfo
  */
-$ffmpeg_check = true;
+$mediainfo_check = true;
 
 /**
  * Feed info
@@ -76,25 +76,16 @@ if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400) :
 endif;
 
 /**
- * Create temp folder if not present
+ * Get mediainfo path
  */
-if (!file_exists('./tmp')) :
-    if (!mkdir('./tmp', 0777)) :
-        die('Temp folder creation failed!');
-    endif;
-endif;
-
-/**
- * Get ffmpeg path
- */
-$ffmpeg = '';
-if ($ffmpeg_check) :
-    $ffmpeg_global = trim(shell_exec('which ffmpeg'));
-    $ffmpeg_static = file_exists('./ffmpeg');
-    if ($ffmpeg_global) $ffmpeg = $ffmpeg_global;
-    if ($ffmpeg_static) $ffmpeg = './ffmpeg';
-    if (!$ffmpeg) :
-        die("For automatic tag reading functionality, you need ffmpeg. Either install it globally on your server or download the correct static binary for your system here:\n\nhttps://ffmpeg.org/download.html\n\nPut it in the same folder as this script. If you download a static build, make sure to configure your web server to block access to the binary for visitors.\n\nIn case you don't want this functionality, set the \$ffmpeg_check variable to 'false'.");
+$mediainfo = '';
+if ($mediainfo_check) :
+    $mediainfo_global = trim(shell_exec('which mediainfo'));
+    $mediainfo_static = file_exists('./mediainfo');
+    if ($mediainfo_global) $mediainfo = $mediainfo_global;
+    if ($mediainfo_static) $mediainfo = './mediainfo';
+    if (!$mediainfo) :
+        die("For automatic tag reading functionality, you need mediainfo. Either install it globally on your server or download the correct static binary for your system here:\n\nhttps://mediaarea.net/en/MediaInfo/Download\n\nPut it in the same folder as this script. If you download a static build, make sure to configure your web server to block access to the binary for visitors.\n\nIn case you don't want this functionality at all, set the \$mediainfo_check variable back to 'false'.");
     endif;
 endif;
 
@@ -153,17 +144,15 @@ if ($handle = opendir('.')) :
             $fileimg_url = $base_url . 'tmp/' . rawurlencode($filename . '.jpg');
 
             ob_start();
-            $cmd = $ffmpeg . ' -y -i ' . escapeshellarg($entry) . ' ' . $fileimg_path . ' 2>&1';
+            $cmd = $mediainfo . ' --Inform=\'General;%Duration/String3%#####%Performer% — %Album%\' ' . escapeshellarg($entry) . ' 2>&1';
             passthru($cmd);
-            $ffmpeg_out = ob_get_contents();
+            $mediainfo_out = ob_get_contents();
             ob_end_clean();
 
-            if ($ffmpeg) :
-                preg_match('/artist.*: (.*)/', $ffmpeg_out, $artist_matches);
-                preg_match('/album.*: (.*)/', $ffmpeg_out, $album_matches);
-                preg_match('/Duration: (.*?),/', $ffmpeg_out, $duration_matches);
-                $title = $artist_matches[1] . ' - ' . $album_matches[1];
-                $duration = $duration_matches[1];
+            if ($mediainfo) :
+                preg_match('/(\d{2}:\d{2}:\d{2}.\d+)#####(.+)/', $mediainfo_out, $matches);
+                $duration = $matches[1];
+                $title = $matches[2];
             else :
                 $title = $p['filename'];
             endif;
@@ -176,10 +165,7 @@ if ($handle = opendir('.')) :
                 $exts[$p['extension']]
             );
             printf("\t\t\t<pubDate>%s</pubDate>\n", date($date_fmt, filemtime($entry)));
-            if ($ffmpeg) :
-                if (file_exists('./tmp/' . $filename . '.jpg')) :
-                    printf("\t\t\t<itunes:image href=\"%s\"/>\n", $fileimg_url);
-                endif;
+            if ($mediainfo) :
                 printf("\t\t\t<itunes:duration>%s</itunes:duration>\n", $duration);
             endif;
             printf("\t\t</item>\n");
