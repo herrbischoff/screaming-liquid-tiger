@@ -9,7 +9,7 @@ I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/
 * Automatically sets per-file MIME type
 * Automatically sets file size
 * Generates valid RSS and Atom feeds for maximum compatibility
-* Automatically extracts tag information and artwork when `ffmpeg` is installed
+* Automatically extracts tag information when `mediainfo` is installed
 
 ## Installation and Usage
 
