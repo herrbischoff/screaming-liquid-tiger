@@ -1,6 +1,6 @@
 # Screaming Liquid Tiger
 
-Simple script to automatically generate valid RSS and Atom feeds from a list of media files in the same folder.
+Simple script to automatically generate valid RSS and Atom feeds from a list of media files in the same folder. Written in PHP to enable use even on the cheapest shared host.
 
 I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/) to listen to my audiobooks. Podcast players are ideal applications for this, contrary to generic media players. It is also trivial to be adapted to other uses and file types.
 
