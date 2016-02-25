@@ -9,6 +9,7 @@
 *.oga
 *.ogg
 *.png
+config.php
 ffmpeg
 tmp
 !/assets/*

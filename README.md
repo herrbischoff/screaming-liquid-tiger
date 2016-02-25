@@ -19,7 +19,7 @@ I wrote this because I wanted an easy way to use [Overcast](https://overcast.fm/
 
 For personal podcasting use, those should obviously be audio files but you can use it with any kind of file.
 
-For easier upgrades, you can now use a `config.php` file (included) to set your options. The script will autodetect if it is present. If not, it will fall back to its included defaults.
+For easier upgrades, you can now use a `config.php` file (included) to set your options. Just rename `config.php.default` to `config.php` and make your adjustments. The script will autodetect if it is present. If not, it will fall back to its included defaults.
 
 ## How to Create Your Own Audiobooks
 
