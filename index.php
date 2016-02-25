@@ -105,7 +105,7 @@ $date_fmt = 'D, d M Y H:i:s e';
 /**
  * Check for HTTPS
  */
-$prot = ($_SERVER['HTTPS'] != "on") ? 'http://' : 'https://';
+$prot = (isset($_SERVER['HTTPS']) != "on") ? 'http://' : 'https://';
 
 /**
  * Determine base URL
