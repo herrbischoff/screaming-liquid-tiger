@@ -50,6 +50,11 @@ Here's what an audiobook may look like while playing in Overcast. Nice, isn't it
 
 ## Changelog
 
+### 0.3.0
+
+* Refactoring of feed generation code.
+* Moved config file to template.
+
 ### 0.2.2
 
 * Enabled external config file `config.php`.
