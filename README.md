@@ -31,6 +31,17 @@ For Windows, I hear good things about  [Chapter and Verse](http://lodensoftware.
 
 For Linux, there are two older projects worth mentioning: [m4baker](https://github.com/crabmanX/m4baker) and [zak](https://code.google.com/p/zak/). If those won't do, you could always script the hell out of `ffmpeg`, `mp4v2` and `MP4tools`.
 
+## Donation
+
+In case you feel particularly generous today, you can buy me a coffee. That would really make my day. Kindness of strangers and all that. If you can't or won't, no hard feelings.
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="5AS5YZU4X5LV2">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+</form>
+
 ## Screenshot
 
 Here's what an audiobook may look like while playing in Overcast. Nice, isn't it?
