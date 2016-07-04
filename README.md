@@ -21,6 +21,12 @@ For personal podcasting use, those should obviously be audio files but you can u
 
 For easier upgrades, you can now use a `config.php` file (included) to set your options. Just rename `config.php.default` to `config.php` and make your adjustments. The script will autodetect if it is present. If not, it will fall back to its included defaults.
 
+If you have a rather large collection of files, you may want to set up a cronjob running the script, redirecting its output to an XML file like so:
+
+```
+*/15 * * * * php index.php > podcast.xml
+```
+
 ## How to Create Your Own Audiobooks
 
 There are several approaches but the one I like best is converting CDs or audio files to a 'Bookmarkable MP4 File', most commonly spotted by its extension `.m4b`. Here's a quick list of software you can use.
