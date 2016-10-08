@@ -155,7 +155,7 @@ if ($handle = opendir('.')) :
         /**
          * Make sure file matches extensions from array
          */
-        if (array_key_exists(pathinfo($entry, PATHINFO_EXTENSION), $exts)) :
+        if (array_key_exists(pathinfo($entry, PATHINFO_EXTENSION), $exts) && !preg_match('/^\./', $entry)) :
             $p = pathinfo($entry);
             $filename = $p['filename'];
             $fileimg_path = escapeshellarg('./tmp/' . $filename . '.jpg');
