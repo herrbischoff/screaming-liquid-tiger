@@ -100,7 +100,7 @@ endif;
 /**
  * Format date according to RFC 822
  */
-$date_fmt = 'D, d M Y H:i:s e';
+$date_fmt = 'D, d M Y H:i:s T';
 
 /**
  * Check for HTTPS
