@@ -134,7 +134,7 @@ $channel->addChild('link', $conf['link']);
 $channel->addChild('description', $conf['description']);
 $channel->addChild('pubDate', date($date_fmt));
 $channel->addChild('lastBuildDate', date($date_fmt));
-$atomlink = $channel->addChild('atom:link');
+$atomlink = $channel->addChild('atom:atom:link');
 $atomlink->addAttribute('rel', 'self');
 $atomlink->addAttribute('type', 'application/rss+xml');
 if (isset($castimg_url)) :
