@@ -93,9 +93,11 @@ if ($handle = opendir($media_base_path)) :
     while ($files[] = readdir($handle));
     sort($files);
 
+    $etag_exts = array_merge($exts, array('xml' => 'text/xml'));
+
     foreach ($files as $entry) :
         $entry_path = $media_base_path . "/" . $entry;
-        if (array_key_exists(pathinfo($entry_path, PATHINFO_EXTENSION), $exts) && !preg_match('/^\./', $entry)) :
+        if (array_key_exists(pathinfo($entry_path, PATHINFO_EXTENSION), $etag_exts) && !preg_match('/^\./', $entry)) :
             $mtime = (string)filemtime($entry_path);
             hash_update($etag_hash, $mtime);
         endif;
@@ -213,23 +215,60 @@ if ($handle = opendir($media_base_path)) :
             else :
                 $title = $p['filename'];
             endif;
+   
+            /**
+             * Load metadata
+             */
+            $metadata = new SimpleXMLElement($xmlstr);
+            $filename_xml = $media_base_path . '/' . $p['filename'] . '.xml';
+            if (file_exists($filename_xml)) :
+                if (($file_metadata = simplexml_load_file($filename_xml)) != FALSE) :
+                    /* We only care about item attributes. They can be top level, or we'll find them if they're under a channel tag */
+                    $xml_items = $file_metadata->xpath('item');
+                    while (list( , $item) = each($xml_items)) :
+                        $file_metadata = $item;
+                        break; 
+                    endwhile;
+                    $metadata = $file_metadata;
+                endif;
+            endif;
 
             /**
              * Contruct feed item
              */
             $entry_urlsafe_path = implode("/", array_map("rawurlencode", explode("/", $entry_path)));
             $item = $channel->addChild('item');
-            $item->addChild('title', $title);
+
+            $item_props = array(
+                'title' => $title,
+                'pubDate' => date($date_fmt, filemtime($entry_path)),
+                );
+            if ($mediainfo) :
+                $item_props['duration'] = $duration;
+            endif;
+            
+            foreach ($item_props as $name => $value) {
+                addItemChild($item, $name, $value, $metadata);
+            }
+
             $guid = $item->addChild('guid', $base_url . $entry_urlsafe_path);
             $guid->addAttribute('isPermalink', 'false');
+
             $enclosure = $item->addChild('enclosure');
             $enclosure->addAttribute('url', $base_url . $entry_urlsafe_path);
             $enclosure->addAttribute('length', filesize($entry_path));
             $enclosure->addAttribute('type', $exts[$p['extension']]);
-            $item->addChild('pubDate', date($date_fmt, filemtime($entry_path)));
-            if ($mediainfo) :
-                $item->addChild('xmlns:itunes:duration', $duration);
-            endif;
+
+            foreach ($metadata->children() as $metadata_child) :
+                if (!isset($item_props[$metadata_child->getName()])) :
+                    $child = $item->addChild($metadata_child->getName(), $metadata_child[0]);
+
+                    foreach($metadata_child->attributes() as $name => $value) :
+                        $child->addAttribute($name, $value);
+                    endforeach;
+                    
+                endif; 
+            endforeach; 
 
         endif;
 
@@ -249,3 +288,32 @@ closedir($handle);
  * Output feed
  */
 echo $rss->asXML();
+
+function addItemChild($item, $childName, $value, $metadata) {
+    $value_to_set = $value;
+    if (isset($metadata->$childName)) :
+        $value_to_set = $metadata->$childName;
+    endif;
+    
+    $child = $item->addChild($childName, $value_to_set);
+
+    if (isset($metadata->$childName)) :
+        foreach($metadata->$childName->attributes() as $name => $value) :
+            $child->addAttribute($name, $value);
+        endforeach;
+    endif;
+}
+
+function appendXML(&$xml1, &$xml2) {
+    if ($xml1 && $xml2) :
+        $xml = $xml1->addChild($xml2->getName()); 
+        foreach($xml2->children() as $child) :
+            appendXML($xml, $child); 
+        endforeach;
+
+        foreach($xml2->attributes() as $n => $v) :
+            $xml->addAttribute($n, $v); 
+        endforeach;
+    endif;
+    return $xml1;
+}
