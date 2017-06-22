@@ -86,6 +86,32 @@ endif;
 header('Content-type: application/rss+xml; charset=utf-8');
 
 /**
+ * Calculate the etag and compare
+ */
+$etag_hash = hash_init("sha256");
+if ($handle = opendir($media_base_path)) :
+    while ($files[] = readdir($handle));
+    sort($files);
+
+    foreach ($files as $entry) :
+        $entry_path = $media_base_path . "/" . $entry;
+        if (array_key_exists(pathinfo($entry_path, PATHINFO_EXTENSION), $exts) && !preg_match('/^\./', $entry)) :
+            $mtime = (string)filemtime($entry_path);
+            hash_update($etag_hash, $mtime);
+        endif;
+    endforeach;
+    closedir($handle);
+endif;
+$etag = hash_final($etag_hash);
+
+if (trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag) :
+    header("HTTP/1.1 304 Not Modified");
+    exit;
+endif;
+
+header("ETag: $etag");
+
+/**
  * Get mediainfo path
  */
 $mediainfo = '';
