@@ -15,6 +15,12 @@
  *****************************************************************************/
 
 /**
+ * The base path to scan for media items
+ * This is relative to the current script
+ */
+$media_base_path = 'media';
+
+/**
  * Whether to check for mediainfo
  */
 $mediainfo_check = false;

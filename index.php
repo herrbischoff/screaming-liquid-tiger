@@ -35,6 +35,8 @@ if (!file_exists('./config.php')) :
      */
     $mediainfo_check = false;
 
+    $media_base_path = '.';
+
     /**
      * Feed info
      *
@@ -145,18 +147,22 @@ endif;
 /**
  * Open file handler for current directory
  */
-if ($handle = opendir('.')) :
+if ($handle = opendir($media_base_path)) :
 
     /**
      * Start item generation loop
      */
     while (false !== ($entry = readdir($handle))) :
+        $entry_path = $entry;
+        if ($media_base_path != ".") :
+            $entry_path = $media_base_path . '/' . $entry;
+        endif;
 
         /**
          * Make sure file matches extensions from array
          */
-        if (array_key_exists(pathinfo($entry, PATHINFO_EXTENSION), $exts) && !preg_match('/^\./', $entry)) :
-            $p = pathinfo($entry);
+        if (array_key_exists(pathinfo($entry_path, PATHINFO_EXTENSION), $exts) && !preg_match('/^\./', $entry)) :
+            $p = pathinfo($entry_path);
             $filename = $p['filename'];
             $fileimg_path = escapeshellarg('./tmp/' . $filename . '.jpg');
             $fileimg_url = $base_url . 'tmp/' . rawurlencode($filename . '.jpg');
@@ -185,15 +191,16 @@ if ($handle = opendir('.')) :
             /**
              * Contruct feed item
              */
+            $entry_urlsafe_path = implode("/", array_map("rawurlencode", explode("/", $entry_path)));
             $item = $channel->addChild('item');
             $item->addChild('title', $title);
-            $guid = $item->addChild('guid', $base_url . rawurlencode($entry));
+            $guid = $item->addChild('guid', $base_url . $entry_urlsafe_path);
             $guid->addAttribute('isPermalink', 'false');
             $enclosure = $item->addChild('enclosure');
-            $enclosure->addAttribute('url', $base_url . rawurlencode($entry));
-            $enclosure->addAttribute('length', filesize($entry));
+            $enclosure->addAttribute('url', $base_url . $entry_urlsafe_path);
+            $enclosure->addAttribute('length', filesize($entry_path));
             $enclosure->addAttribute('type', $exts[$p['extension']]);
-            $item->addChild('pubDate', date($date_fmt, filemtime($entry)));
+            $item->addChild('pubDate', date($date_fmt, filemtime($entry_path)));
             if ($mediainfo) :
                 $item->addChild('xmlns:itunes:duration', $duration);
             endif;
