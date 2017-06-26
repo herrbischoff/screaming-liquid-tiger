@@ -7,7 +7,7 @@
  * @author     Marcel Bischoff
  * @copyright  2015-2016 Marcel Bischoff
  * @license    http://opensource.org/licenses/MIT The MIT Licence
- * @version    0.3.0
+ * @version    0.4.0
  * @link       https://github.com/herrbischoff/screaming-liquid-tiger
  * @since      File available since Release 0.1.0
  *****************************************************************************/
@@ -150,7 +150,6 @@ endif;
 /**
  * Construct feed
  */
-
 $xmlstr = '<?xml version="1.0" encoding="UTF-8"?><rss/>';
 $rss = new SimpleXMLElement($xmlstr);
 $rss->addAttribute('version', '2.0');
