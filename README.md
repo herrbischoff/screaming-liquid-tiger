@@ -51,6 +51,11 @@ Here's what an audiobook may look like while playing in Overcast. Nice, isn't it
 
 ## Changelog
 
+### 0.4.0
+
+* Added support for optional custom media directory. (by @farktronix)
+* Added ETag support. (by @farktronix)
+
 ### 0.3.1
 
 * Makes sure that dotfiles are not included in the feed generation.  Sometimes extended attributes are saved in dotfiles with the same suffix. Those files are now excluded by default and no longer clutter up the feed.

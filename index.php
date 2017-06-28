@@ -7,7 +7,7 @@
  * @author     Marcel Bischoff
  * @copyright  2015-2016 Marcel Bischoff
  * @license    http://opensource.org/licenses/MIT The MIT Licence
- * @version    0.3.0
+ * @version    0.4.0
  * @link       https://github.com/herrbischoff/screaming-liquid-tiger
  * @since      File available since Release 0.1.0
  *****************************************************************************/
@@ -152,7 +152,6 @@ endif;
 /**
  * Construct feed
  */
-
 $xmlstr = '<?xml version="1.0" encoding="UTF-8"?><rss/>';
 $rss = new SimpleXMLElement($xmlstr);
 $rss->addAttribute('version', '2.0');
@@ -244,7 +243,7 @@ if ($handle = opendir($media_base_path)) :
                 'pubDate' => date($date_fmt, filemtime($entry_path)),
                 );
             if ($mediainfo) :
-                $item_props['duration'] = $duration;
+                $item_props['xmlns:itunes:duration'] = $duration;
             endif;
             
             foreach ($item_props as $name => $value) {
