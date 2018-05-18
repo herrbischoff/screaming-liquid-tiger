@@ -247,4 +247,8 @@ closedir($handle);
 /**
  * Output feed
  */
-echo $rss->asXML();
+$dom = new DOMDocument('1.0');
+$dom->preserveWhiteSpace = false;
+$dom->formatOutput = true;
+$dom->loadXML($rss->asXML());
+echo $dom->saveXML();
